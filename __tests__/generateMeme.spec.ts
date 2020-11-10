@@ -36,7 +36,21 @@ describe('generateMeme tests', () => {
   })
 
   it('should fail generating a meme', async (done) => {
-    throw new Error('Not implemented')
+    const response = await request(app)
+      .post('/api/generateMeme')
+      .send({})
+
+    expect(
+      JSON.stringify({
+        status: response.status,
+        field_error: response.body.errors
+      })
+    ).toBe(
+      JSON.stringify({
+        status: 404,
+        field_error: { texts: ['texts is a required field'] }
+      })
+    )
     done()
   })
 
