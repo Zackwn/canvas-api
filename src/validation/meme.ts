@@ -5,7 +5,7 @@ export default {
     texts: yup.array(
       yup.object().shape({
         text: yup.string().required(),
-        position: yup.object().shape({
+        positions: yup.object().shape({
           x: yup.number().required(),
           y: yup.number().required()
         }),
