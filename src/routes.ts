@@ -8,11 +8,7 @@ const routes = Router()
 routes.post('/generateMeme', async (req, res) => {
   const { texts } = req.body
 
-  if (!texts) {
-    return res.status(404).send()
-  }
-
-  await memeValidation.generate.validate(texts, {
+  await memeValidation.generate.validate({ texts }, {
     abortEarly: false
   })
 
