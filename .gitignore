@@ -1,6 +1,6 @@
 node_modules
 .env
-src/images/*
-!src/images/.gitkeep
+__tests__/testImages/*
+!__tests__/testImages/.gitkeep
 __tests__/coverage/*
 !__tests__/coverage/.gitkeep
