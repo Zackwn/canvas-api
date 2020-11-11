@@ -14,8 +14,8 @@ interface ICanvasConfig {
   heigth: number
 }
 
-interface GenerateMemeParams {
-  imagePath: string,
+interface GenerateImageParams {
+  image: Express.Multer.File.buffer,
   texts: IText[],
   textColor: string,
   fontSize?: number,

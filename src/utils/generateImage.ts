@@ -1,18 +1,18 @@
 import { createCanvas, loadImage } from 'canvas'
 
-export const generateMeme = async ({
-  canvasConfig, imagePath, textColor, texts, fontSize
-}: GenerateMemeParams): Promise<string> => {
+export const generateImage = async ({
+  canvasConfig, image, textColor, texts, fontSize
+}: GenerateImageParams): Promise<string> => {
   const canvas = createCanvas(
     canvasConfig.width,
     canvasConfig.heigth
   )
 
-  const image = await loadImage(imagePath)
+  const img = await loadImage(image)
 
   const context = canvas.getContext('2d')
 
-  context.drawImage(image, 0, 0, canvas.width, canvas.height)
+  context.drawImage(img, 0, 0, canvas.width, canvas.height)
 
   context.fillStyle = textColor
   context.font = `${fontSize}px sans-serif`
@@ -24,7 +24,7 @@ export const generateMeme = async ({
     context.fillText(text, positions.x, positions.y)
   })
 
-  const memeURL = canvas.toDataURL()
+  const imageURL = canvas.toDataURL()
 
-  return memeURL
+  return imageURL
 }

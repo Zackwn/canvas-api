@@ -1,20 +1,23 @@
 import { Router } from 'express'
-import { generateMeme } from './utils/generateMeme'
-import path from 'path'
-import memeValidation from './validation/meme'
+import { generateImage } from './utils/generateImage'
+import textsValidation from './validation/texts'
+import multerConfig from './upload/multer'
+
+const multerUpload = multerConfig.single('image')
 
 const routes = Router()
 
-routes.post('/generateMeme', async (req, res) => {
-  const { texts } = req.body
+routes.post('/generateImage', multerUpload, async (req, res) => {
+  const { texts: textsString } = req.body
+  const texts = JSON.parse(textsString).texts
 
-  await memeValidation.generate.validate({ texts }, {
+  await textsValidation.generate.validate({ texts }, {
     abortEarly: false
   })
 
-  const imgUrl = await generateMeme({
+  const imgUrl = await generateImage({
+    image: req.file.buffer,
     canvasConfig: { heigth: 500, width: 500 },
-    imagePath: path.resolve(__dirname, 'images', 'billy.jpg'),
     textColor: '#000',
     texts
   })
