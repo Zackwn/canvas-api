@@ -9,8 +9,13 @@ const errorHandler: ErrorRequestHandler = (error, req, res, next) => {
       errors[err.path] = err.errors
     })
 
-    return res.status(404).json({ errors })
+    return res.status(400).json({ errors })
   }
+  // parse json error
+  if (error instanceof SyntaxError) {
+    return res.status(400).send()
+  }
+  console.log(error)
   return res.status(500).send()
 }
 
